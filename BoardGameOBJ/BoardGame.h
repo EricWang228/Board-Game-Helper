@@ -1,12 +1,12 @@
 #pragma once
 #include <string>
 #include <iostream>
-
+using namespace std;
 class BoardGame
 {
     private:
     // variables
-    std::string name;
+    string name;
     unsigned int year;
     unsigned int min_player;
     unsigned int max_players;
@@ -14,9 +14,12 @@ class BoardGame
     public:
     // Constructors
     BoardGame();
-    BoardGame(std::string name, unsigned int year, unsigned int min_players, unsigned int max_players, unsigned int age);
+    BoardGame(string name, unsigned int year, unsigned int min_players, unsigned int max_players, unsigned int age);
+    // Operator Overload
+    BoardGame& operator=(const BoardGame& other);
+
     // Get methods
-    std::string get_name();
+    string get_name();
     unsigned int get_year();
     unsigned int get_min_players();
     unsigned int get_max_players();
@@ -34,13 +37,21 @@ BoardGame::BoardGame()
     age = 0;
 }
 
-BoardGame::BoardGame(std::string name, unsigned int year, unsigned int min_players, unsigned int max_players, unsigned int age)
+BoardGame::BoardGame(string name, unsigned int year, unsigned int min_players, unsigned int max_players, unsigned int age)
 {
     this->name = name;
     this->year = year;
     this->min_player = min_player;
     this->max_players = max_players;
     this->age = age;
+}
+
+BoardGame& BoardGame::operator=(const BoardGame& other){
+    this->name = other.name;
+    this->year = other.year;
+    this->min_player = other.min_player;
+    this->max_players = other.max_players;
+    this->age = other.age;
 }
 
 std::string BoardGame::get_name()
@@ -70,9 +81,9 @@ unsigned int BoardGame::get_age()
 
 void BoardGame::print_details()
 {
-    std::cout << "Board Game Name: " << name << std::endl;
-    std::cout << "Year Published: " << year << std::endl;
-    std::cout << "Min Players: " << min_player << std::endl;
-    std::cout << "Max Players: " << max_players << std::endl;
-    std::cout << "Min Age: " << age << std::endl;
+    cout << "Board Game Name: " << name << endl;
+    cout << "Year Published: " << year << endl;
+    cout << "Min Players: " << min_player << endl;
+    cout << "Max Players: " << max_players << endl;
+    cout << "Min Age: " << age << endl;
 }
