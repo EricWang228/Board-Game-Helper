@@ -4,7 +4,8 @@ using namespace std;
 
 int main() {
 
-	int option, filter, contOpt;
+	int option, filter, contOpt, year, minPlay, maxPlay, minAge;
+	string name;
 
 	cout << "Welcome To Board Bot!" << endl;
 
@@ -39,23 +40,79 @@ int main() {
 			}
 
 			if (filter == 1) { // Name filter
+				cout << "\nEnter Board Game Name: " << endl;
+				cin >> name;
+
+
 				// call function
 				// output time for both hash functions
 				//cout << "Time: " << something << endl;
 			}
 			else if (filter == 2) { // Year filter
+				cout << "\nEnter Year Board Game was Published: " << endl;
+				cin >> year;
 				// call function
 				// output time for both hash functions
 			}
 			else if (filter == 3) { // Min Player filter
+				while (true) {
+					cout << "\nMinimum Players: " << endl;
+					cout << "1. 1 - 2" << endl;
+					cout << "2. 3 - 4" << endl;
+					cout << "3. 5 - 6" << endl;
+					cout << "4. 7 - 8" << endl;
+					cout << "5. 9 - 10" << endl;
+					cout << "6. 10+" << endl;
+
+					cin >> minPlay;
+
+					if (minPlay > 0 && minPlay < 7) {
+						break;
+					}
+
+					cout << "\nInvalid Selection\nPlease Select: 1, 2, 3, 4, 5 or 6" << endl;
+				}
 				// call function
 				// output time for both hash functions
 			}
 			else if (filter == 4) { // Max Player filter
+				while (true) {
+					cout << "\nMaximum Players: " << endl;
+					cout << "1. 1 - 2" << endl;
+					cout << "2. 3 - 4" << endl;
+					cout << "3. 5 - 6" << endl;
+					cout << "4. 7 - 8" << endl;
+					cout << "5. 9 - 10" << endl;
+					cout << "6. 10+" << endl;
+
+					cin >> maxPlay;
+
+					if (maxPlay > 0 && maxPlay < 7) {
+						break;
+					}
+
+					cout << "\nInvalid Selection\nPlease Select: 1, 2, 3, 4, 5 or 6" << endl;
+				}
 				// call function
 				// output time for both hash functions
 			}
 			else if (filter == 5) { // Max Age Filter
+				while (true) {
+					cout << "\nMinimum Age: " << endl;
+					cout << "1. 1 - 5" << endl;
+					cout << "2. 6 - 11" << endl;
+					cout << "3. 12 - 15" << endl;
+					cout << "4. 16 - 17" << endl;
+					cout << "5. 18+" << endl;
+
+					cin >> minAge;
+
+					if (minAge > 0 && minAge < 6) {
+						break;
+					}
+
+					cout << "\nInvalid Selection\nPlease Select: 1, 2, 3, 4, or 5" << endl;
+				}
 				// call function
 				// output time for both hash functions
 			}
@@ -88,6 +145,7 @@ int main() {
 		}
 
 		if (contOpt == 2) {
+			cout << "\nThanks for Using Board Bot!" << endl;
 			break;
 		}
 		
