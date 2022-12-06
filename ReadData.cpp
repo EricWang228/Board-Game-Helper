@@ -3,7 +3,10 @@
 #include <string>
 #include <iostream>
 #include "BoardGameOBJ/BoardGame.h"
+#include "SCHash.cpp"
 using namespace std;
+
+void printall(vector<BoardGame> new_test);
 
 int main()
 {
@@ -20,18 +23,15 @@ int main()
     // variables to store data
     string name;
 
-    string yearPublished_;
-    int yearPublished;
+    string yearPublished;
 
-    string minPlayers_;
-    int minPlayers;
+    string minPlayers;
 
-    string maxPlayers_;
-    int maxPlayers;
+    string maxPlayers;
 
-    string minAge_;
-    int minAge;
+    string minAge;
 
+    string avgRating;
     // data order from csv file
     // ID;Name;Year Published;Min Players;Max Players;Play Time;Min Age;
 
@@ -45,25 +45,26 @@ int main()
         getline(input, name, ';');
 
         // year published
-        getline(input, yearPublished_, ';');
+        getline(input, yearPublished, ';');
 
         // min players
-        getline(input, minPlayers_, ';');
+        getline(input, minPlayers, ';');
 
         // max players
-        getline(input, maxPlayers_, ';');
+        getline(input, maxPlayers, ';');
 
         // min age, skip play time
-        getline(input, minAge_, ';');
-        getline(input, minAge_, ';');
-
-        // convert to integers to fit object parameters
-        yearPublished = stoi(yearPublished_);
-        minPlayers = stoi(minPlayers_);
-        maxPlayers = stoi(maxPlayers_);
-        minAge = stoi(minAge_);
-
-        BoardGame test = BoardGame(name, yearPublished, minPlayers, maxPlayers, minAge);
-        test.print_details();
+        getline(input, minAge, ';');
+        getline(input, minAge, ';');
+        
+        // avg rating, and changes ',' to '.'
+        getline(input, avgRating, ';');
+        getline(input, avgRating, ';');
+        if(avgRating.find(',') != string::npos){
+            avgRating.replace(avgRating.find(','), 1, ".");
+        }
+ 
+        BoardGame test = BoardGame(name, yearPublished, minPlayers, maxPlayers, minAge, avgRating);
     } 
+
 }
