@@ -8,6 +8,7 @@ int main() {
 
 	int option, filter, contOpt, year, minPlay, maxPlay, minAge;
 	string name;
+	//double duration1, duration2;
 
 	cout << "Welcome To Board Bot!" << endl;
 
@@ -23,12 +24,14 @@ int main() {
 			auto start = high_resolution_clock::now();
 			// call function to find top 10 Open Addressing
 			auto stop = high_resolution_clock::now();
-			auto duration1 = duration_cast<nanoseconds>(stop - start);
+			//auto duration1 = duration_cast<nanoseconds>(stop - start);
+			duration<double, nano> duration1 = stop - start;
 
-			auto start = high_resolution_clock::now();
+			start = high_resolution_clock::now();
 			// call function to find top 10 Separate Chaining
-			auto stop = high_resolution_clock::now();
-			auto duration2 = duration_cast<nanoseconds>(stop - start);
+			stop = high_resolution_clock::now();
+			//auto duration2 = duration_cast<nanoseconds>(stop - start);
+			duration<double, nano> duration2 = stop - start;
 
 			// OUTPUT OF EITHER FUNCTION
 
@@ -63,9 +66,9 @@ int main() {
 				auto stop = high_resolution_clock::now();
 				auto duration1 = duration_cast<nanoseconds>(stop - start);
 
-				auto start = high_resolution_clock::now();
+				start = high_resolution_clock::now();
 				// call function for instance of name Separate Chaining
-				auto stop = high_resolution_clock::now();
+				stop = high_resolution_clock::now();
 				auto duration2 = duration_cast<nanoseconds>(stop - start);
 
 				// OUTPUT OF EITHER FUNCTION
@@ -78,13 +81,13 @@ int main() {
 				cin >> year;
 
 				auto start = high_resolution_clock::now();
-				// call function to find year Open Addressing
+				//call function to find year Open Addressing
 				auto stop = high_resolution_clock::now();
 				auto duration1 = duration_cast<nanoseconds>(stop - start);
 
-				auto start = high_resolution_clock::now();
+				start = high_resolution_clock::now();
 				// call function to find year Separate Chaining
-				auto stop = high_resolution_clock::now();
+				stop = high_resolution_clock::now();
 				auto duration2 = duration_cast<nanoseconds>(stop - start);
 
 				// OUTPUT OF EITHER FUNCTION
@@ -115,9 +118,9 @@ int main() {
 				auto stop = high_resolution_clock::now();
 				auto duration1 = duration_cast<nanoseconds>(stop - start);
 
-				auto start = high_resolution_clock::now();
+				start = high_resolution_clock::now();
 				// call function to find minPlayers Separate Chaining
-				auto stop = high_resolution_clock::now();
+				stop = high_resolution_clock::now();
 				auto duration2 = duration_cast<nanoseconds>(stop - start);
 
 				// OUTPUT OF EITHER FUNCTION
@@ -147,11 +150,13 @@ int main() {
 				// call function to find maxPlayer Open Addressing
 				auto stop = high_resolution_clock::now();
 				auto duration1 = duration_cast<nanoseconds>(stop - start);
-
-				auto start = high_resolution_clock::now();
+				
+				start = high_resolution_clock::now();
 				// call function to find maxPlayer Separate Chaining
-				auto stop = high_resolution_clock::now();
+				stop = high_resolution_clock::now();
 				auto duration2 = duration_cast<nanoseconds>(stop - start);
+
+				// OUTPUT EITHER FUNCTION
 
 				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " ns" << endl;
 				cout << "Execution Time with Separate Chaining: " << duration2.count() << " ns" << endl;
@@ -178,10 +183,12 @@ int main() {
 				auto stop = high_resolution_clock::now();
 				auto duration1 = duration_cast<nanoseconds>(stop - start);
 
-				auto start = high_resolution_clock::now();
+				start = high_resolution_clock::now();
 				// call function to find minAge Separate Chaining
-				auto stop = high_resolution_clock::now();
+				stop = high_resolution_clock::now();
 				auto duration2 = duration_cast<nanoseconds>(stop - start);
+
+				// OUTPUT EITHER FUNCTION
 
 				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " ns" << endl;
 				cout << "Execution Time with Separate Chaining: " << duration2.count() << " ns" << endl;
