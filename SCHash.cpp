@@ -1,11 +1,9 @@
-
 #include <string>
 #include <cstring>
 #include <vector>
 #include <list>
 #include "BoardGameOBJ/BoardGame.h"
 using namespace std;
-
 
 class SCHash{
     private: 
@@ -17,9 +15,9 @@ class SCHash{
         unsigned long hash_function(string& key); 
         // Each index maps to a list for SC resolution
         vector<list<item*>> hash_table; 
-        int cap;
-        int b_size ;
-        double l_factor;
+        int cap = 16;
+        int b_size = 0;
+        double l_factor = 0.75;
         // For both updated_table inserts and current hash_table inserts
         void private_insert(vector<list<item*>>& map, string key, BoardGame& value); 
         // Resize table for Load Factor
@@ -59,9 +57,6 @@ unsigned long SCHash::hash_function(string& key){
 }
 
 SCHash::SCHash(){
-    cap = 16;
-    b_size = 0;
-    l_factor = 0.75;
     for(int i = 0; i < cap; i++){
         list<item*> temp;
         hash_table.push_back(temp);
