@@ -8,7 +8,7 @@ int main() {
 
 	int option, filter, contOpt, year, minPlay, maxPlay, minAge;
 	string name;
-	//double duration1, duration2;
+	auto start = system_clock::now(), stop = system_clock::now();
 
 	cout << "Welcome To Board Bot!" << endl;
 
@@ -21,22 +21,18 @@ int main() {
 		cin >> option;
 
 		if (option == 1) {
-			auto start = high_resolution_clock::now();
+			start = system_clock::now();
 			// call function to find top 10 Open Addressing
-			auto stop = high_resolution_clock::now();
-			//auto duration1 = duration_cast<nanoseconds>(stop - start);
-			duration<double, nano> duration1 = stop - start;
+			auto duration1 = duration_cast<microseconds>(system_clock::now() - start);
 
-			start = high_resolution_clock::now();
+			start = system_clock::now();
 			// call function to find top 10 Separate Chaining
-			stop = high_resolution_clock::now();
-			//auto duration2 = duration_cast<nanoseconds>(stop - start);
-			duration<double, nano> duration2 = stop - start;
+			auto duration2 = duration_cast<microseconds>(system_clock::now() - start);
 
 			// OUTPUT OF EITHER FUNCTION
 
-			cout << "\nExecution Time with Open Addressing: " << duration1.count() << " ns" << endl;
-			cout << "Execution Time with Separate Chaining: " << duration2.count() << " ns" << endl;
+			cout << "\nExecution Time with Open Addressing: " << duration1.count() << " microseconds" << endl;
+			cout << "Execution Time with Separate Chaining: " << duration2.count() << " microseconds" << endl;
 		}
 		else if (option == 2) { // SUBJECT TO CHANGE
 			while (true) {
@@ -61,39 +57,35 @@ int main() {
 				cout << "\nEnter Board Game Name: " << endl;
 				cin >> name;
 
-				auto start = high_resolution_clock::now();
+				start = system_clock::now();
 				// call function for instance of name Open Addressing
-				auto stop = high_resolution_clock::now();
-				auto duration1 = duration_cast<nanoseconds>(stop - start);
+				auto duration1 = duration_cast<microseconds>(system_clock::now() - start);
 
-				start = high_resolution_clock::now();
+				start = system_clock::now();
 				// call function for instance of name Separate Chaining
-				stop = high_resolution_clock::now();
-				auto duration2 = duration_cast<nanoseconds>(stop - start);
+				auto duration2 = duration_cast<microseconds>(system_clock::now() - start);
 
 				// OUTPUT OF EITHER FUNCTION
 
-				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " ns" << endl;
-				cout << "Execution Time with Separate Chaining: " << duration2.count() << " ns" << endl;
+				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " microseconds" << endl;
+				cout << "Execution Time with Separate Chaining: " << duration2.count() << " microseconds" << endl;
 			}
 			else if (filter == 2) { // Year filter
 				cout << "\nEnter Year Board Game was Published: " << endl;
 				cin >> year;
 
-				auto start = high_resolution_clock::now();
-				//call function to find year Open Addressing
-				auto stop = high_resolution_clock::now();
-				auto duration1 = duration_cast<nanoseconds>(stop - start);
+				start = system_clock::now();
+				// call function to find year Open Addressing
+				auto duration1 = duration_cast<microseconds>(system_clock::now() - start);
 
-				start = high_resolution_clock::now();
+				start = system_clock::now();
 				// call function to find year Separate Chaining
-				stop = high_resolution_clock::now();
-				auto duration2 = duration_cast<nanoseconds>(stop - start);
+				auto duration2 = duration_cast<microseconds>(system_clock::now() - start);
 
 				// OUTPUT OF EITHER FUNCTION
 
-				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " ns" << endl;
-				cout << "Execution Time with Separate Chaining: " << duration2.count() << " ns" << endl;
+				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " microseconds" << endl;
+				cout << "Execution Time with Separate Chaining: " << duration2.count() << " microseconds" << endl;
 			}
 			else if (filter == 3) { // Min Player filter
 				while (true) {
@@ -113,20 +105,19 @@ int main() {
 
 					cout << "\nInvalid Selection\nPlease Select: 1, 2, 3, 4, 5 or 6" << endl;
 				}
-				auto start = high_resolution_clock::now();
-				// call function to find minPlayers Open Addressing
-				auto stop = high_resolution_clock::now();
-				auto duration1 = duration_cast<nanoseconds>(stop - start);
 
-				start = high_resolution_clock::now();
+				start = system_clock::now();
+				// call function to find minPlayers Open Addressing
+				auto duration1 = duration_cast<microseconds>(system_clock::now() - start);
+
+				start = system_clock::now();
 				// call function to find minPlayers Separate Chaining
-				stop = high_resolution_clock::now();
-				auto duration2 = duration_cast<nanoseconds>(stop - start);
+				auto duration2 = duration_cast<microseconds>(system_clock::now() - start);
 
 				// OUTPUT OF EITHER FUNCTION
 
-				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " ns" << endl;
-				cout << "Execution Time with Separate Chaining: " << duration2.count() << " ns" << endl;
+				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " microseconds" << endl;
+				cout << "Execution Time with Separate Chaining: " << duration2.count() << " microseconds" << endl;
 			}
 			else if (filter == 4) { // Max Player filter
 				while (true) {
@@ -146,20 +137,19 @@ int main() {
 
 					cout << "\nInvalid Selection\nPlease Select: 1, 2, 3, 4, 5 or 6" << endl;
 				}
-				auto start = high_resolution_clock::now();
+
+				start = system_clock::now();
 				// call function to find maxPlayer Open Addressing
-				auto stop = high_resolution_clock::now();
-				auto duration1 = duration_cast<nanoseconds>(stop - start);
-				
-				start = high_resolution_clock::now();
+				auto duration1 = duration_cast<microseconds>(system_clock::now() - start);
+
+				start = system_clock::now();
 				// call function to find maxPlayer Separate Chaining
-				stop = high_resolution_clock::now();
-				auto duration2 = duration_cast<nanoseconds>(stop - start);
+				auto duration2 = duration_cast<microseconds>(system_clock::now() - start);
 
 				// OUTPUT EITHER FUNCTION
 
-				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " ns" << endl;
-				cout << "Execution Time with Separate Chaining: " << duration2.count() << " ns" << endl;
+				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " microseconds" << endl;
+				cout << "Execution Time with Separate Chaining: " << duration2.count() << " microseconds" << endl;
 			}
 			else if (filter == 5) { // Max Age Filter
 				while (true) {
@@ -178,20 +168,19 @@ int main() {
 
 					cout << "\nInvalid Selection\nPlease Select: 1, 2, 3, 4, or 5" << endl;
 				}
-				auto start = high_resolution_clock::now();
-				// call function to find minAge Open Addressing
-				auto stop = high_resolution_clock::now();
-				auto duration1 = duration_cast<nanoseconds>(stop - start);
 
-				start = high_resolution_clock::now();
+				start = system_clock::now();
+				// call function to find minAge Open Addressing
+				auto duration1 = duration_cast<microseconds>(system_clock::now() - start);
+
+				start = system_clock::now();
 				// call function to find minAge Separate Chaining
-				stop = high_resolution_clock::now();
-				auto duration2 = duration_cast<nanoseconds>(stop - start);
+				auto duration2 = duration_cast<microseconds>(system_clock::now() - start);
 
 				// OUTPUT EITHER FUNCTION
 
-				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " ns" << endl;
-				cout << "Execution Time with Separate Chaining: " << duration2.count() << " ns" << endl;
+				cout << "\nExecution Time with Open Addressing: " << duration1.count() << " microseconds" << endl;
+				cout << "Execution Time with Separate Chaining: " << duration2.count() << " microseconds" << endl;
 			}
 			else if (filter == 6) { // Back to Options
 				continue;
