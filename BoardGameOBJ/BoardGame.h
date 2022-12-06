@@ -46,6 +46,7 @@ BoardGame::BoardGame(string name, unsigned int year, unsigned int min_player, un
     this->age = age;
 }
 
+
 BoardGame& BoardGame::operator=(const BoardGame& other){
     this->name = other.name;
     this->year = other.year;
@@ -86,5 +87,5 @@ void BoardGame::print_details()
     cout << "Year Published: " << year << endl;
     cout << "Min Players: " << min_player << endl;
     cout << "Max Players: " << max_players << endl;
-    cout << "Min Age: " << age << endl;
+    cout << "Min Age: " << age << endl << endl << endl;
 }
