@@ -8,13 +8,11 @@ using namespace std;
 
 
 class SCHash{
-    public:
+    private: 
         struct item{
             string key;
             BoardGame value;
         };
-    private:
-        
         item* create_item(string& key, BoardGame& value);
         unsigned long hash_function(string& key); 
         // Each index maps to a list for SC resolution
@@ -38,6 +36,8 @@ class SCHash{
         // Insertion and deletion 
         void insert(string key, BoardGame& value);
         void remove(string key);
+        // Search
+        vector<BoardGame> find_all(string target);
 }; 
 
 typename SCHash::item* SCHash::create_item(string& key, BoardGame& value){
@@ -48,26 +48,13 @@ typename SCHash::item* SCHash::create_item(string& key, BoardGame& value){
 }
 
 unsigned long SCHash::hash_function(string& key){
-    /*
-    // Converts key to char*
-    char* temp = new char[key.length()-1];
-    strcpy(temp, key.c_str());
-    unsigned long hash = 0;
-    for(int i = 0; temp[i]; i++){
-        hash += temp[i];
-    }
-    // Deletes the allocated space
-    delete[] temp;
-    hash = hash % cap;
-    return hash;
-    */
+    // Follows Sum of ACII * 2137 % Capacity 
     unsigned long hash = 0;
     for(int i = 0; i < key.length(); i++){
         char a = key[i];
-        int temp = (int)a;
-        hash += temp;
+        hash += a;
     }
-    hash = hash % cap;
+    hash = (hash*2137) % cap;
     return hash;
 }
 
@@ -113,6 +100,7 @@ void SCHash::private_insert(vector<list<item*>>& map, string key, BoardGame& val
     for(auto iter = block.begin(); iter != block.end(); iter++){
         if((*iter)->key == key){
             keyExists = true;
+            b_size--;
             (*iter)->value = value;
             break;
         }
@@ -163,4 +151,17 @@ void SCHash::remove(string key){
             break;
         }
     }
+}
+
+vector<BoardGame> SCHash::find_all(string target){
+    vector<BoardGame> targets;
+    for(int i = 0; i < hash_table.size(); i++){
+        auto& block = hash_table[i];
+        for(auto iter = block.begin(); iter != block.end(); iter++){
+            if((*iter)->key.find(target) != string::npos){
+                targets.push_back((*iter)->value);
+            }
+        }
+    }
+    return targets;
 }
