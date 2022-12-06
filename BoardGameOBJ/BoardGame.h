@@ -17,7 +17,7 @@ class BoardGame
     BoardGame(string name, unsigned int year, unsigned int min_players, unsigned int max_players, unsigned int age);
     // Operator Overload
     BoardGame& operator=(const BoardGame& other);
-
+    
     // Get methods
     string get_name();
     unsigned int get_year();
@@ -37,7 +37,7 @@ BoardGame::BoardGame()
     age = 0;
 }
 
-BoardGame::BoardGame(string name, unsigned int year, unsigned int min_players, unsigned int max_players, unsigned int age)
+BoardGame::BoardGame(string name, unsigned int year, unsigned int min_player, unsigned int max_players, unsigned int age)
 {
     this->name = name;
     this->year = year;
@@ -52,6 +52,7 @@ BoardGame& BoardGame::operator=(const BoardGame& other){
     this->min_player = other.min_player;
     this->max_players = other.max_players;
     this->age = other.age;
+    return *this;
 }
 
 std::string BoardGame::get_name()
