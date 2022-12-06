@@ -17,11 +17,12 @@ class SCHash{
         item* create_item(string& key, BoardGame& value);
         unsigned long hash_function(string& key); 
         // Default map items
-        list<item*> hash_table[16]; // SC collion resolution
+        vector<list<item*>> hash_table; // SC collion resolution
         int cap;
         int b_size ;
         double l_factor;
-
+        void private_insert(vector<list<item*>>& map, string key, BoardGame& value);
+        vector<list<item*>> update_table();
     public:
         // Default Constructor
         SCHash();
@@ -45,6 +46,7 @@ typename SCHash::item* SCHash::create_item(string& key, BoardGame& value){
 }
 
 unsigned long SCHash::hash_function(string& key){
+    /*
     // Converts key to char*
     char* temp = new char[key.length()-1];
     strcpy(temp, key.c_str());
@@ -53,14 +55,28 @@ unsigned long SCHash::hash_function(string& key){
         hash += temp[i];
     }
     // Deletes the allocated space
+    delete[] temp;
+    hash = hash % cap;
+    return hash;
+    */
+    unsigned long hash = 0;
+    for(int i = 0; i < key.length(); i++){
+        char a = key[i];
+        int temp = (int)a;
+        hash += temp;
+    }
     hash = hash % cap;
     return hash;
 }
 
 SCHash::SCHash(){
-    cap = 16;
+    cap = 4;
     b_size = 0;
     l_factor = 0.75;
+    for(int i = 0; i < cap; i++){
+        list<item*> temp;
+        hash_table.push_back(temp);
+    }
 }
 
 SCHash::~SCHash(){
@@ -80,10 +96,10 @@ double SCHash::load_factor(){
     return l_factor;
 }
 
-void SCHash::insert(string key, BoardGame& value){
+void SCHash::private_insert(vector<list<item*>>& map, string key, BoardGame& value){
     unsigned long index = hash_function(key);
     b_size++;
-    auto& block = hash_table[index];
+    auto& block = map[index];
     bool keyExists = false;
     for(auto iter = block.begin(); iter != block.end(); iter++){
         if((*iter)->key == key){
@@ -94,6 +110,37 @@ void SCHash::insert(string key, BoardGame& value){
     }
     if(!keyExists){
         block.emplace_back(create_item(key, value));
+    }
+}
+
+vector<list<SCHash::item*>> SCHash::update_table(){
+    // Double capacity
+    cap = 2*cap;
+    // Make new table with double the size
+    vector<list<item*>> new_table;
+    for(int i = 0; i < cap; i++){
+        list<item*> temp;
+        new_table.push_back(temp);
+    }
+    for(int j = 0; j < hash_table.size(); j++){
+        auto& block = hash_table[j];
+        for(auto iter = block.begin(); iter != block.end(); iter++){
+            private_insert(new_table, (*iter)->key, (*iter)->value);
+            b_size--;
+            delete (*iter);
+            iter = --block.erase(iter);
+        }
+    }
+    return new_table;
+}
+
+void SCHash::insert(string key, BoardGame& value){
+    if(((double)b_size/cap) >= l_factor){ // Load Factor reached double size of hashmap
+        hash_table = update_table();
+        private_insert(hash_table, key, value);
+    }
+    else{
+        private_insert(hash_table, key, value);
     }
 }
 
