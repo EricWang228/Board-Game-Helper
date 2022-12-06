@@ -38,7 +38,7 @@ class SCHash{
         void insert(string key, BoardGame& value);
         void remove(string key);
         // Search
-        vector<BoardGame> find_all(string target);
+        void find_all(string target);
         BoardGame find(string target);
 }; 
 
@@ -158,18 +158,18 @@ void SCHash::remove(string key){
     }
 }
 
-vector<BoardGame> SCHash::find_all(string target){
-    vector<BoardGame> vals;
+void SCHash::find_all(string target){
+    // vector<BoardGame> vals;
     // Loops though all 
     for(int i = 0; i < hash_table.size(); i++){
         auto& Bucket = hash_table[i];
         for(auto iter = Bucket.begin(); iter != Bucket.end(); iter++){
             if((*iter)->key.find(target) != string::npos){
-                vals.push_back((*iter)->value);
+                (*iter)->value.print_details();
             }
         }
     }
-    return vals;
+    // return vals;
 }
 
 BoardGame SCHash::find(string target){
@@ -196,3 +196,5 @@ BoardGame SCHash::find(string target){
     // Nothing is found
     return empty;
 }
+
+
