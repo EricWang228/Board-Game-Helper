@@ -14,15 +14,18 @@ class SCHash{
             BoardGame value;
         };
     private:
+        
         item* create_item(string& key, BoardGame& value);
         unsigned long hash_function(string& key); 
-        // Default map items
-        vector<list<item*>> hash_table; // SC collion resolution
+        // Each index maps to a list for SC resolution
+        vector<list<item*>> hash_table; 
         int cap;
         int b_size ;
         double l_factor;
-        void private_insert(vector<list<item*>>& map, string key, BoardGame& value);
-        vector<list<item*>> update_table();
+        // For both updated_table inserts and current hash_table inserts
+        void private_insert(vector<list<item*>>& map, string key, BoardGame& value); 
+        // Resize table for Load Factor
+        vector<list<item*>> update_table(); 
     public:
         // Default Constructor
         SCHash();
@@ -35,7 +38,6 @@ class SCHash{
         // Insertion and deletion 
         void insert(string key, BoardGame& value);
         void remove(string key);
-
 }; 
 
 typename SCHash::item* SCHash::create_item(string& key, BoardGame& value){
@@ -70,7 +72,7 @@ unsigned long SCHash::hash_function(string& key){
 }
 
 SCHash::SCHash(){
-    cap = 4;
+    cap = 16;
     b_size = 0;
     l_factor = 0.75;
     for(int i = 0; i < cap; i++){
@@ -80,7 +82,14 @@ SCHash::SCHash(){
 }
 
 SCHash::~SCHash(){
-    
+    // Loops through all indicies and deletes all item* in the list structure
+    for(int i = 0; i < cap; i++){
+        auto& block = hash_table[i];
+        for (auto iter = block.begin(); iter != block.end(); iter++){
+            delete(*iter);
+            iter = --block.erase(iter);
+        }
+    }
 }
 
 // Getters
@@ -146,12 +155,10 @@ void SCHash::insert(string key, BoardGame& value){
 
 void SCHash::remove(string key){
     unsigned long index = hash_function(key);
-    b_size++;
     auto& block = hash_table[index];
-    bool keyExists = false;
     for(auto iter = block.begin(); iter != block.end(); iter++){
         if((*iter)->key == key){
-            keyExists = true;
+            b_size--;
             iter = block.erase(iter);
             break;
         }
