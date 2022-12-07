@@ -137,17 +137,7 @@ int main() {
 
 			else if (filter == 3) { // Min Player filter
 				while (true) {
-					cout << "\nMinimum Players: " << endl;
-					cout << "1. 1" << endl;
-					cout << "2. 2" << endl;
-					cout << "3. 3" << endl;
-					cout << "4. 4" << endl;
-					cout << "5. 5" << endl;
-					cout << "6. 6" << endl;
-					cout << "7. 7" << endl;
-					cout << "8. 8" << endl;
-					cout << "9. 9" << endl;
-					cout << "10. 10+" << endl;
+					cout << "\nInput Minimum Players (1 - 10, 10+ Represented by 10): " << endl;
 
 					cin >> minPlay;
 
@@ -189,17 +179,7 @@ int main() {
 
 			else if (filter == 4) { // Max Player filter
 				while (true) {
-					cout << "\nMaximum Players: " << endl;
-					cout << "1. 1" << endl;
-					cout << "2. 2" << endl;
-					cout << "3. 3" << endl;
-					cout << "4. 4" << endl;
-					cout << "5. 5" << endl;
-					cout << "6. 6" << endl;
-					cout << "7. 7" << endl;
-					cout << "8. 8" << endl;
-					cout << "9. 9" << endl;
-					cout << "10. 10+" << endl;
+					cout << "\nInput Maximum Players (1 - 10, 10+ Represented by 10): " << endl;
 
 					cin >> maxPlay;
 
@@ -241,25 +221,7 @@ int main() {
 
 			else if (filter == 5) { // Max Age Filter
 				while (true) {
-					cout << "\nMinimum Age: " << endl;
-					cout << "1. 1" << endl;
-					cout << "2. 2" << endl;
-					cout << "3. 3" << endl;
-					cout << "4. 4" << endl;
-					cout << "5. 5" << endl;
-					cout << "6. 6" << endl;
-					cout << "7. 7" << endl;
-					cout << "8. 8" << endl;
-					cout << "9. 9" << endl;
-					cout << "10. 10" << endl;
-					cout << "11. 11" << endl;
-					cout << "12. 12" << endl;
-					cout << "13. 13" << endl;
-					cout << "14. 14" << endl;
-					cout << "15. 15" << endl;
-					cout << "16. 16" << endl;
-					cout << "17. 17" << endl;
-					cout << "18. 18+" << endl;
+					cout << "\nInput Minimum Age (1 - 18, 18+ Represented by 18): " << endl;
 
 					cin >> minAge;
 
