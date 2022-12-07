@@ -18,7 +18,12 @@ class BoardGame
     BoardGame(string name, string year, string min_players, string max_players, string age, string avgRating);
     // Operator Overload
     BoardGame& operator=(const BoardGame& other);
-
+    //getters
+    string get_name();
+    string get_year();
+    int get_min_player();
+    int get_max_players();
+    int get_age();
     // print object
     void print_details();
 };
@@ -43,7 +48,6 @@ BoardGame::BoardGame(string name, string year, string min_players, string max_pl
     this->avg_rating = avg_rating;
 }
 
-
 BoardGame& BoardGame::operator=(const BoardGame& other){
     this->name = other.name;
     this->year = other.year;
@@ -52,6 +56,26 @@ BoardGame& BoardGame::operator=(const BoardGame& other){
     this->age = other.age;
     this->avg_rating = other.avg_rating;
     return *this;
+}
+
+string BoardGame::get_name(){
+    return name;
+}
+
+string BoardGame::get_year(){
+    return year;
+}
+
+int BoardGame::get_min_player(){
+    return stoi(min_player);
+}
+
+int BoardGame::get_max_players(){
+    return stoi(max_players);
+}
+
+int BoardGame::get_age(){
+    return stoi(age);
 }
 
 void BoardGame::print_details()
