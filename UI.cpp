@@ -14,40 +14,14 @@ int main() {
 
 	while (true) {
 		cout << "\nSelect An Option:" << endl;
-		cout << "1. Print Top 10 Rated Board Games" << endl;
+		cout << "1. Print All Board Games" << endl;
 		cout << "2. Search By Filter" << endl;
 		cout << "3. Exit" << endl;
 
 		cin >> option;
 
-		if (option == 1) { // Print Top 10 Rated
-			while(true) {
-				cout << "\nSelect A Collision Resolution Strategy: " << endl;
-				cout << "1. Open Addressing" << endl;
-				cout << "2. Separate Chaining" << endl;
-
-				cin >> hashType;
-
-				if (hashType > 0 && hashType < 3) {
-					break;
-				}
-
-				cout << "\nInvalid Selection\nPlease Select: 1 or 2" << endl;;
-			}
-			
-			if (hashType == 1) {
-				start = system_clock::now();
-				// call function to find top 10 Open Addressing
-				auto duration = duration_cast<microseconds>(system_clock::now() - start);
-				cout << "\nExecution Time with Open Addressing: " << duration.count() << " microseconds" << endl;
-			}
-
-			if (hashType == 2) {
-				start = system_clock::now();
-				// call function to find top 10 Separate Chaining
-				auto duration = duration_cast<microseconds>(system_clock::now() - start);
-				cout << "\nExecution Time with Separate Chaining: " << duration.count() << " microseconds" << endl;
-			}
+		if (option == 1) { // Print All Board Games
+			// takes input directly and outputs it
 		}
 
 		else if (option == 2) { // Search by Filter
