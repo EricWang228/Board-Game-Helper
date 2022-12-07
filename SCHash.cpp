@@ -19,7 +19,6 @@ class SCHash{
         vector<list<item*>> hash_table; 
         item* create_item(string& key, BoardGame& value);
         unsigned long hash_function(string& key); 
-        BoardGame empty;
         // Helper for insert, supports both regular and updated inserts
         void private_insert(vector<list<item*>>& map, string key, BoardGame& value); 
         // Resize table for Load Factor
@@ -38,9 +37,12 @@ class SCHash{
         void insert(string key, BoardGame& value);
         void remove(string key);
         // Search
+        void find(string target);
         void find_all(string target);
-        BoardGame find(string target);
-        void find_10(string type, string target);
+        void find_all_year(string target);
+        void find_all_minPlayers(string target);
+        void find_all_maxPlayers(string target);
+        void find_all_age(string target);
 }; 
 
 typename SCHash::item* SCHash::create_item(string& key, BoardGame& value){
@@ -160,8 +162,6 @@ void SCHash::remove(string key){
 }
 
 void SCHash::find_all(string target){
-    // vector<BoardGame> vals;
-    // Loops though all 
     for(int i = 0; i < hash_table.size(); i++){
         auto& Bucket = hash_table[i];
         for(auto iter = Bucket.begin(); iter != Bucket.end(); iter++){
@@ -173,14 +173,14 @@ void SCHash::find_all(string target){
     // return vals;
 }
 
-BoardGame SCHash::find(string target){
+void SCHash::find(string target){
     unsigned long index = hash_function(target);
     auto& Bucket = hash_table[index];
     // Searches in potential bucket for target first
     for(auto iter = Bucket.begin(); iter != Bucket.end(); iter++){
         if((*iter)->key.find(target) != string::npos){
-                return (*iter)->value;
-            } 
+            (*iter)->value.print_details();
+        } 
     }
     // Target is not in potential bucket
     for(int i = 0; i < hash_table.size(); i++){
@@ -190,27 +190,74 @@ BoardGame SCHash::find(string target){
         Bucket = hash_table[i];
         for(auto iter = Bucket.begin(); iter != Bucket.end(); iter++){
             if((*iter)->key.find(target) != string::npos){
-                return (*iter)->value;
+                (*iter)->value.print_details();
             }
         }
     }
-    // Nothing is found
-    return empty;
 }
 
-void SCHash:: find_10(string type, string target){
-    
-    if(type == "year"){
-
+void SCHash::find_all_year(string target){
+    for(int i = 0; i < hash_table.size(); i++){
+        auto& Bucket = hash_table[i];
+        for(auto iter = Bucket.begin(); iter != Bucket.end(); iter++){
+            if((*iter)->value.get_year() == target){
+                (*iter)->value.print_details();
+            }
+        }
     }
-    else if(type == "min players"){
-
-    }
-    else if(type == "max players"){
-
-    }
-    else if(type == "min age"){
-
-    }
-    
 }
+
+void SCHash::find_all_minPlayers(string target){
+    int max = stoi(target);
+    for(int i = 0; i < hash_table.size(); i++){
+        auto& Bucket = hash_table[i];
+        for(auto iter = Bucket.begin(); iter != Bucket.end(); iter++){
+            if(max == 10){
+                if((*iter)->value.get_min_player() >= max){
+                    (*iter)->value.print_details();
+                }
+            }
+            else if((*iter)->value.get_min_player() == max){
+                (*iter)->value.print_details();
+            }
+        }
+    }
+}
+
+void SCHash::find_all_maxPlayers(string target){
+    int max = stoi(target);
+    for(int i = 0; i < hash_table.size(); i++){
+        auto& Bucket = hash_table[i];
+        for(auto iter = Bucket.begin(); iter != Bucket.end(); iter++){
+            if(max == 10){
+                if((*iter)->value.get_max_players() >= max){
+                    (*iter)->value.print_details();
+                }
+            }
+            else if((*iter)->value.get_max_players() == max){
+                (*iter)->value.print_details();
+            }
+        }
+    }
+}
+
+void SCHash::find_all_age(string target){
+    int max = stoi(target);
+    for(int i = 0; i < hash_table.size(); i++){
+        auto& Bucket = hash_table[i];
+        for(auto iter = Bucket.begin(); iter != Bucket.end(); iter++){
+            if(max == 18){
+                if((*iter)->value.get_age() >= max){
+                    (*iter)->value.print_details();
+                }
+            }
+            else if((*iter)->value.get_age() == max){
+                (*iter)->value.print_details();
+            }
+            
+        }
+    }
+}
+
+
+
