@@ -1,17 +1,29 @@
 #include<iostream>
 #include<chrono>
-
+#include<fstream>
+#include<string>
+#include<sstream>
+#include "OAHash.cpp"
+#include "SCHash.cpp"
+#include "BoardGameOBJ/BoardGame.h"
 using namespace std;
 using namespace std::chrono;
+
+void readData(SCHash& SC, OAHash& OA);
 
 int main() {
 
 	int option, filter, contOpt, hashType, year, minPlay, maxPlay, minAge;
 	string name;
+	SCHash SC;
+	OAHash OA;
+	readData(SC, OA);
+
 	auto start = system_clock::now(), stop = system_clock::now();
 
 	cout << "Welcome To Board Bot!" << endl;
 
+	
 	while (true) {
 		cout << "\nSelect An Option:" << endl;
 		cout << "1. Print All Board Games" << endl;
@@ -25,6 +37,7 @@ int main() {
 		}
 
 		else if (option == 2) { // Search by Filter
+	
 			while (true) {
 				cout << "\nSelect A Filter:" << endl;
 				cout << "1. Name" << endl;
@@ -64,6 +77,7 @@ int main() {
 				if (hashType == 1) {
 					start = system_clock::now();
 					// call function for instance of name Open Addressing
+					OA.find_all(name);
 					auto duration = duration_cast<microseconds>(system_clock::now() - start);
 					cout << "\nExecution Time with Open Addressing: " << duration.count() << " microseconds" << endl;
 				}
@@ -71,6 +85,7 @@ int main() {
 				if (hashType == 2) {
 					start = system_clock::now();
 					// call function for instance of name Separate Chaining
+					SC.find_all(name);
 					auto duration = duration_cast<microseconds>(system_clock::now() - start);
 					cout << "\nExecution Time with Separate Chaining: " << duration.count() << " microseconds" << endl;
 				}
@@ -97,6 +112,7 @@ int main() {
 				if (hashType == 1) {
 					start = system_clock::now();
 					// call function to find year Open Addressing
+					OA.find_all_year(to_string(year));
 					auto duration = duration_cast<microseconds>(system_clock::now() - start);
 					cout << "\nExecution Time with Open Addressing: " << duration.count() << " microseconds" << endl;
 				}
@@ -104,6 +120,7 @@ int main() {
 				if (hashType == 2) {
 					start = system_clock::now();
 					// call function to find year Separate Chaining
+					SC.find_all_year(to_string(year));
 					auto duration = duration_cast<microseconds>(system_clock::now() - start);
 					cout << "\nExecution Time with Separate Chaining: " << duration.count() << " microseconds" << endl;
 				}
@@ -139,12 +156,14 @@ int main() {
 				if (hashType == 1) {
 					start = system_clock::now();
 					// call function to find minPlayers Open Addressing
+					OA.find_all_minPlayers(to_string(minPlay));
 					auto duration = duration_cast<microseconds>(system_clock::now() - start);
 					cout << "\nExecution Time with Open Addressing: " << duration.count() << " microseconds" << endl;
 				}
 
 				if (hashType == 2) {
 					start = system_clock::now();
+					SC.find_all_minPlayers(to_string(minPlay));
 					// call function to find minPlayers Separate Chaining
 					auto duration = duration_cast<microseconds>(system_clock::now() - start);
 					cout << "\nExecution Time with Separate Chaining: " << duration.count() << " microseconds" << endl;
@@ -181,6 +200,7 @@ int main() {
 				if (hashType == 1) {
 					start = system_clock::now();
 					// call function to find maxPlayer Open Addressing
+					OA.find_all_maxPlayers(to_string(maxPlay));
 					auto duration = duration_cast<microseconds>(system_clock::now() - start);
 					cout << "\nExecution Time with Open Addressing: " << duration.count() << " microseconds" << endl;
 				}
@@ -188,6 +208,7 @@ int main() {
 				if (hashType == 2) {
 					start = system_clock::now();
 					// call function to find maxPlayer Separate Chaining
+					SC.find_all_maxPlayers(to_string(maxPlay));
 					auto duration = duration_cast<microseconds>(system_clock::now() - start);
 					cout << "\nExecution Time with Separate Chaining: " << duration.count() << " microseconds" << endl;
 				}
@@ -223,6 +244,7 @@ int main() {
 				if (hashType == 1) {
 					start = system_clock::now();
 					// call function to find minAge Open Addressing
+					OA.find_all_age(to_string(minAge));
 					auto duration = duration_cast<microseconds>(system_clock::now() - start);
 					cout << "\nExecution Time with Open Addressing: " << duration.count() << " microseconds" << endl;
 				}
@@ -230,6 +252,7 @@ int main() {
 				if (hashType == 2) {
 					start = system_clock::now();
 					// call function to find minAge Separate Chaining
+					SC.find_all_age(to_string(minAge));
 					auto duration = duration_cast<microseconds>(system_clock::now() - start);
 					cout << "\nExecution Time with Separate Chaining: " << duration.count() << " microseconds" << endl;
 				}
@@ -268,4 +291,64 @@ int main() {
 			break;
 		}
 	}
+}
+
+void readData(SCHash& SC, OAHash& OA){
+	// open file
+    fstream file;
+    file.open("bgg_dataset.csv");
+
+    // line of data
+    string line = "";
+
+    // read in one line of input
+    getline(file, line);
+
+    // variables to store data
+    string name;
+
+    string yearPublished;
+
+    string minPlayers;
+
+    string maxPlayers;
+
+    string minAge;
+
+    string avgRating;
+    // data order from csv file
+    // ID;Name;Year Published;Min Players;Max Players;Play Time;Min Age;
+    // while loop until there's no more lines
+    while(getline(file, line))
+    {
+        stringstream input(line);
+
+        // name, skip id
+        getline(input, name, ';');
+        getline(input, name, ';');
+
+        // year published
+        getline(input, yearPublished, ';');
+
+        // min players
+        getline(input, minPlayers, ';');
+
+        // max players
+        getline(input, maxPlayers, ';');
+
+        // min age, skip play time
+        getline(input, minAge, ';');
+        getline(input, minAge, ';');
+        
+        // avg rating, and changes ',' to '.'
+        getline(input, avgRating, ';');
+        getline(input, avgRating, ';');
+        if(avgRating.find(',') != string::npos){
+            avgRating.replace(avgRating.find(','), 1, ".");
+        }
+
+        BoardGame test = BoardGame(name, yearPublished, minPlayers, maxPlayers, minAge, avgRating);
+		SC.insert(name, test);
+		OA.insert(name, test);
+    } 
 }
