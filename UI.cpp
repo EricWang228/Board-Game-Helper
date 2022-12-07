@@ -138,20 +138,24 @@ int main() {
 			else if (filter == 3) { // Min Player filter
 				while (true) {
 					cout << "\nMinimum Players: " << endl;
-					cout << "1. 1 - 2" << endl;
-					cout << "2. 3 - 4" << endl;
-					cout << "3. 5 - 6" << endl;
-					cout << "4. 7 - 8" << endl;
-					cout << "5. 9 - 10" << endl;
-					cout << "6. 10+" << endl;
+					cout << "1. 1" << endl;
+					cout << "2. 2" << endl;
+					cout << "3. 3" << endl;
+					cout << "4. 4" << endl;
+					cout << "5. 5" << endl;
+					cout << "6. 6" << endl;
+					cout << "7. 7" << endl;
+					cout << "8. 8" << endl;
+					cout << "9. 9" << endl;
+					cout << "10. 10+" << endl;
 
 					cin >> minPlay;
 
-					if (minPlay > 0 && minPlay < 7) {
+					if (minPlay > 0 && minPlay < 11) {
 						break;
 					}
 
-					cout << "\nInvalid Selection\nPlease Select: 1, 2, 3, 4, 5 or 6" << endl;
+					cout << "\nInvalid Selection\nPlease Select An Integer 1 - 10" << endl;
 				}
 
 				while (true) {
@@ -186,20 +190,24 @@ int main() {
 			else if (filter == 4) { // Max Player filter
 				while (true) {
 					cout << "\nMaximum Players: " << endl;
-					cout << "1. 1 - 2" << endl;
-					cout << "2. 3 - 4" << endl;
-					cout << "3. 5 - 6" << endl;
-					cout << "4. 7 - 8" << endl;
-					cout << "5. 9 - 10" << endl;
-					cout << "6. 10+" << endl;
+					cout << "1. 1" << endl;
+					cout << "2. 2" << endl;
+					cout << "3. 3" << endl;
+					cout << "4. 4" << endl;
+					cout << "5. 5" << endl;
+					cout << "6. 6" << endl;
+					cout << "7. 7" << endl;
+					cout << "8. 8" << endl;
+					cout << "9. 9" << endl;
+					cout << "10. 10+" << endl;
 
 					cin >> maxPlay;
 
-					if (maxPlay > 0 && maxPlay < 7) {
+					if (maxPlay > 0 && maxPlay < 11) {
 						break;
 					}
 
-					cout << "\nInvalid Selection\nPlease Select: 1, 2, 3, 4, 5 or 6" << endl;
+					cout << "\nInvalid Selection\nPlease Select An Integer 1 - 10" << endl;
 				}
 
 				while (true) {
@@ -234,15 +242,28 @@ int main() {
 			else if (filter == 5) { // Max Age Filter
 				while (true) {
 					cout << "\nMinimum Age: " << endl;
-					cout << "1. 1 - 5" << endl;
-					cout << "2. 6 - 11" << endl;
-					cout << "3. 12 - 15" << endl;
-					cout << "4. 16 - 17" << endl;
-					cout << "5. 18+" << endl;
+					cout << "1. 1" << endl;
+					cout << "2. 2" << endl;
+					cout << "3. 3" << endl;
+					cout << "4. 4" << endl;
+					cout << "5. 5" << endl;
+					cout << "6. 6" << endl;
+					cout << "7. 7" << endl;
+					cout << "8. 8" << endl;
+					cout << "9. 9" << endl;
+					cout << "10. 10" << endl;
+					cout << "11. 11" << endl;
+					cout << "12. 12" << endl;
+					cout << "13. 13" << endl;
+					cout << "14. 14" << endl;
+					cout << "15. 15" << endl;
+					cout << "16. 16" << endl;
+					cout << "17. 17" << endl;
+					cout << "18. 18+" << endl;
 
 					cin >> minAge;
 
-					if (minAge > 0 && minAge < 6) {
+					if (minAge > 0 && minAge < 19) {
 						break;
 					}
 
@@ -310,6 +331,5 @@ int main() {
 			cout << "\nThanks for Using Board Bot!" << endl;
 			break;
 		}
-		
 	}
 }
