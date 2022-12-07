@@ -40,6 +40,7 @@ class SCHash{
         // Search
         void find_all(string target);
         BoardGame find(string target);
+        void find_10(string type, string target);
 }; 
 
 typename SCHash::item* SCHash::create_item(string& key, BoardGame& value){
@@ -197,4 +198,19 @@ BoardGame SCHash::find(string target){
     return empty;
 }
 
+void SCHash:: find_10(string type, string target){
+    
+    if(type == "year"){
 
+    }
+    else if(type == "min players"){
+
+    }
+    else if(type == "max players"){
+
+    }
+    else if(type == "min age"){
+
+    }
+    
+}

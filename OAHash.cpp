@@ -62,15 +62,15 @@ void OAHash::private_insert(vector<item*>& map, string key, BoardGame value){
     table_size++;
     for(int i = index; i < cap; i++){
         // Bucket is empty
-        if(map[index] == nullptr){
-            map[index] = create_item(key, value);
+        if(map[i] == nullptr){
+            map[i] = create_item(key, value);
             // break when inserted
             break;
         }
         // Bucket is not empty, check for same key
-        if(map[index]->key == key){
-            delete map[index];
-            map[index] = create_item(key, value);
+        if(map[i]->key == key){
+            delete map[i];
+            map[i] = create_item(key, value);
             break;
         }
         // reset to front 
@@ -85,13 +85,14 @@ vector<OAHash::item*> OAHash::update_table(){
     // make new table with double the size
     vector<item*> new_table;
     for(int i = 0; i < cap; i++){
-        item* temp;
+        item* temp = nullptr;
         new_table.push_back(temp);
     }
     // Rehashes and inserts all values inside new table
     for(int j = 0; j < hash_table.size(); j++){
         if(hash_table[j] != nullptr){
             private_insert(new_table, hash_table[j]->key, hash_table[j]->value);
+            table_size--;
             // Free memeory
             delete hash_table[j];
         }
