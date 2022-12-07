@@ -161,18 +161,6 @@ void SCHash::remove(string key){
     }
 }
 
-void SCHash::find_all(string target){
-    for(int i = 0; i < hash_table.size(); i++){
-        auto& Bucket = hash_table[i];
-        for(auto iter = Bucket.begin(); iter != Bucket.end(); iter++){
-            if((*iter)->key.find(target) != string::npos){
-                (*iter)->value.print_details();
-            }
-        }
-    }
-    // return vals;
-}
-
 void SCHash::find(string target){
     unsigned long index = hash_function(target);
     auto& Bucket = hash_table[index];
@@ -194,6 +182,18 @@ void SCHash::find(string target){
             }
         }
     }
+}
+
+void SCHash::find_all(string target){
+    for(int i = 0; i < hash_table.size(); i++){
+        auto& Bucket = hash_table[i];
+        for(auto iter = Bucket.begin(); iter != Bucket.end(); iter++){
+            if((*iter)->key.find(target) != string::npos){
+                (*iter)->value.print_details();
+            }
+        }
+    }
+    // return vals;
 }
 
 void SCHash::find_all_year(string target){
@@ -254,7 +254,6 @@ void SCHash::find_all_age(string target){
             else if((*iter)->value.get_age() == max){
                 (*iter)->value.print_details();
             }
-            
         }
     }
 }

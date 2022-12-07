@@ -33,9 +33,13 @@ class OAHash{
         // Insertion and Deletion
         void insert(string key, BoardGame& value);
         void remove(string key);
-
-        vector<BoardGame> find_all(string target);
-        BoardGame find(string target);
+        // Searches
+        void find(string target);
+        void find_all(string target);
+        void find_all_year(string target);
+        void find_all_minPlayers(string target);
+        void find_all_maxPlayers(string target);
+        void find_all_age(string target);
 };
 
 typename OAHash::item* OAHash::create_item(string& key, BoardGame& value){
@@ -155,17 +159,7 @@ void OAHash::remove(string key){
     }
 }
 
-vector<BoardGame> OAHash::find_all(string target){
-    vector<BoardGame> vals;
-    for(int i = 0; i < cap; i++){
-        if(hash_table[i]->key.find(target) != string::npos){
-            vals.push_back(hash_table[i]->value);
-        }
-    }
-    return vals;
-}
-
-BoardGame OAHash::find(string target){
+void OAHash::find(string target){
     // Go to potential index first and continue from there
     unsigned long index = hash_function(target);
     for(int i = index; i < cap; i++){
@@ -175,12 +169,79 @@ BoardGame OAHash::find(string target){
         }
         // Bucket is filled, check if target is the right one
         if(hash_table[index]->key.find(target) != string::npos){
-            return hash_table[index]->value;
+            hash_table[index]->value.print_details();
         }
         // reset to front 
         if(i == 15){
             i = 0;
         }
     }
-    return empty;
+}
+
+void OAHash::find_all(string target){
+    for(int i = 0; i < cap; i++){
+        if(hash_table[i] != nullptr){
+            if(hash_table[i]->key.find(target) != string::npos){
+                hash_table[i]->value.print_details();
+            }
+        }
+    }
+}
+
+void OAHash::find_all_year(string target){
+    for(int i = 0; i < cap; i++){
+        if(hash_table[i] != nullptr){
+            if(hash_table[i]->value.get_year() == target){
+                hash_table[i]->value.print_details();
+            }
+        }
+    }
+}
+
+void OAHash::find_all_minPlayers(string target){
+    int max = stoi(target);
+    for(int i = 0; i < cap; i++){
+        if(hash_table[i] != nullptr){
+            if(max == 10){
+                if(hash_table[i]->value.get_min_player() >= max){
+                    hash_table[i]->value.print_details();
+                }
+            }
+            else if(hash_table[i]->value.get_min_player() == max){
+                hash_table[i]->value.print_details();
+            }
+        }
+    }
+}
+
+void OAHash::find_all_maxPlayers(string target){
+    int max = stoi(target);
+    for(int i = 0; i < cap; i++){
+        if(hash_table[i] != nullptr){
+            if(max == 10){
+                if(hash_table[i]->value.get_max_players() >= max){
+                    hash_table[i]->value.print_details();
+                }
+            }
+            else if(hash_table[i]->value.get_max_players() == max){
+                hash_table[i]->value.print_details();
+            }
+        }
+    }
+}
+
+void OAHash::find_all_age(string target){
+    int max = stoi(target);
+    for(int i = 0; i < cap; i++){
+        if(hash_table[i] != nullptr){
+            if(max == 10){
+                if(hash_table[i]->value.get_age() >= max){
+                    hash_table[i]->value.print_details();
+                }
+            }
+            else if(hash_table[i]->value.get_age() == max){
+                hash_table[i]->value.print_details();
+            }
+        }
+    }
 }
